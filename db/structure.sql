@@ -40,6 +40,39 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: premios; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.premios (
+    id bigint NOT NULL,
+    nome character varying,
+    ano integer,
+    user_id integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: premios_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.premios_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: premios_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.premios_id_seq OWNED BY public.premios.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -61,6 +94,7 @@ CREATE TABLE public.users (
     remember_created_at timestamp without time zone,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
+    role character varying DEFAULT 'aluno'::character varying,
     CONSTRAINT email_must_be_company_email CHECK (((email)::text ~* '^[^@]+@usp\.br$'::text))
 );
 
@@ -85,6 +119,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: premios id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.premios ALTER COLUMN id SET DEFAULT nextval('public.premios_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -97,6 +138,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: premios premios_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.premios
+    ADD CONSTRAINT premios_pkey PRIMARY KEY (id);
 
 
 --
@@ -137,6 +186,8 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20201201230839'),
-('20201201231645');
+('20201201231645'),
+('20201201232801'),
+('20201201233253');
 
 
