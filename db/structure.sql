@@ -95,6 +95,8 @@ CREATE TABLE public.users (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL,
     role character varying DEFAULT 'aluno'::character varying,
+    first_name character varying NOT NULL,
+    last_name character varying NOT NULL,
     CONSTRAINT email_must_be_company_email CHECK (((email)::text ~* '^[^@]+@usp\.br$'::text))
 );
 
@@ -188,6 +190,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201201230839'),
 ('20201201231645'),
 ('20201201232801'),
-('20201201233253');
+('20201201233253'),
+('20201201233654');
 
 
