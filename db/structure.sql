@@ -40,6 +40,47 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: complementos; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.complementos (
+    id bigint NOT NULL,
+    user_id bigint,
+    apelido character varying,
+    codigo character varying,
+    pais character varying,
+    description text,
+    can_send_email boolean,
+    ano_graduacao integer,
+    temperatura_corpo double precision,
+    preco numeric,
+    aniversario date,
+    horario_favorito time without time zone,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: complementos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.complementos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: complementos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.complementos_id_seq OWNED BY public.complementos.id;
+
+
+--
 -- Name: premios; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -121,6 +162,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: complementos id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.complementos ALTER COLUMN id SET DEFAULT nextval('public.complementos_id_seq'::regclass);
+
+
+--
 -- Name: premios id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -140,6 +188,14 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: complementos complementos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.complementos
+    ADD CONSTRAINT complementos_pkey PRIMARY KEY (id);
 
 
 --
@@ -164,6 +220,13 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_complementos_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_complementos_on_user_id ON public.complementos USING btree (user_id);
 
 
 --
@@ -202,6 +265,14 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON public.users USING bt
 
 
 --
+-- Name: complementos fk_rails_c5976626b8; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.complementos
+    ADD CONSTRAINT fk_rails_c5976626b8 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -213,6 +284,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20201201232801'),
 ('20201201233253'),
 ('20201201233654'),
-('20201201234900');
+('20201201234900'),
+('20201202124144');
 
 

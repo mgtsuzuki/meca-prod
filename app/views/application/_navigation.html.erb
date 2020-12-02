@@ -7,7 +7,8 @@
   <% elsif current_user.role == "professor" %>
     Mensagem aos professores. |
   <% else %>
-    Mensagem aos alunos. |
+    Mensagem aos alunos. | 
+    <%= link_to "Complemento", [current_user, current_user.complemento] %> |
   <% end %>
   <%= link_to "Log out", destroy_user_session_path, method: :delete %>
 <% else %>

@@ -1,0 +1,72 @@
+<%= form_with(model: [@user, @complemento], local: true) do |form| %>
+  <% if complemento.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(complemento.errors.count, "error") %> prohibited this complemento from being saved:</h2>
+
+      <ul>
+        <% complemento.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :apelido %>
+    <%= form.text_field :apelido %>
+  </div>
+
+  <div class="field">
+    <%= form.label :codigo %>
+    <%= form.password_field :codigo %>
+  </div>
+
+  <div class="custom-control custom-radio">
+    <legend>Pais</legend>
+    <%= form.radio_button :pais, 'Brasil' %>
+    <%= form.label "complemento_pais_brasil", "Brasil" %><br>
+    <%= form.radio_button :pais, 'Argentina' %>
+    <%= form.label "complemento_pais_argentina", "Argentina" %><br>
+    <%= form.radio_button :pais, 'Uruguai' %>
+    <%= form.label "complemento_pais_uruguai", "Uruguai" %><br>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, cols:30, rows: 10 %>
+  </div>
+
+  <div class="field">
+    <%= form.check_box :can_send_email, autofocus: true, class: "form-check-input", id: "defaultUnchecked" %>
+    <%= form.label :can_send_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ano_graduacao %>
+    <%= form.number_field :ano_graduacao %>
+  </div>
+
+  <div class="field">
+    <%= form.label :temperatura_corpo %>
+    <%= form.text_field :temperatura_corpo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :preco %>
+    <%= form.text_field :preco %>
+  </div>
+
+  <div class="field">
+    <%= form.label :aniversario %>
+    <%= form.date_select :aniversario %>
+  </div>
+
+  <div class="field">
+    <%= form.label :horario_favorito %>
+    <%= form.time_select :horario_favorito %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

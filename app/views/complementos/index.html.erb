@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Complementos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Apelido</th>
+      <th>Codigo</th>
+      <th>Pais</th>
+      <th>Description</th>
+      <th>Can send email</th>
+      <th>Ano graduacao</th>
+      <th>Temperatura corpo</th>
+      <th>Preco</th>
+      <th>Aniversario</th>
+      <th>Horario favorito</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @complementos.each do |complemento| %>
+      <tr>
+        <td><%= complemento.apelido %></td>
+        <td><%= complemento.codigo %></td>
+        <td><%= complemento.pais %></td>
+        <td><%= complemento.description %></td>
+        <td><%= complemento.can_send_email %></td>
+        <td><%= complemento.ano_graduacao %></td>
+        <td><%= complemento.temperatura_corpo %></td>
+        <td><%= complemento.preco %></td>
+        <td><%= complemento.aniversario %></td>
+        <td><%= complemento.horario_favorito %></td>
+        <td><%= link_to 'Show', complemento %></td>
+        <td><%= link_to 'Edit', edit_complemento_path(complemento) %></td>
+        <td><%= link_to 'Destroy', complemento, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Complemento', new_complemento_path %>

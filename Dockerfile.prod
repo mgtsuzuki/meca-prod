@@ -34,6 +34,8 @@ RUN ["chmod", "+x", "/usr/src/app/docker-entrypoint.sh"]
     
 WORKDIR /usr/src/app
 RUN bundle install
+RUN bin/rails webpacker:install
+RUN bin/rails webpacker:install:react
 RUN bin/rails assets:precompile
             
 ENTRYPOINT [ "./docker-entrypoint.sh" ]

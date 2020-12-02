@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Apelido:</strong>
+  <%= @complemento.apelido %>
+</p>
+
+<p>
+  <strong>Codigo:</strong>
+  <%= @complemento.codigo %>
+</p>
+
+<p>
+  <strong>Pais:</strong>
+  <%= @complemento.pais %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @complemento.description %>
+</p>
+
+<p>
+  <strong>Can send email:</strong>
+  <%= @complemento.can_send_email %>
+</p>
+
+<p>
+  <strong>Ano graduacao:</strong>
+  <%= @complemento.ano_graduacao %>
+</p>
+
+<p>
+  <strong>Temperatura corpo:</strong>
+  <%= @complemento.temperatura_corpo %>
+</p>
+
+<p>
+  <strong>Preco:</strong>
+  <%= @complemento.preco %>
+</p>
+
+<p>
+  <strong>Aniversario:</strong>
+  <%= @complemento.aniversario %>
+</p>
+
+<p>
+  <strong>Horario favorito:</strong>
+  <%= @complemento.horario_favorito %>
+</p>
+
+<%= link_to 'Edit', edit_user_complemento_path(@user, @complemento) %> |
+<%= link_to 'Back', root_path %>
