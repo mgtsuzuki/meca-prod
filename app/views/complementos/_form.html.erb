@@ -21,15 +21,12 @@
     <%= form.password_field :codigo %>
   </div>
 
-  <div class="custom-control custom-radio">
-    <legend>Pais</legend>
-    <%= form.radio_button :pais, 'Brasil' %>
-    <%= form.label "complemento_pais_brasil", "Brasil" %><br>
-    <%= form.radio_button :pais, 'Argentina' %>
-    <%= form.label "complemento_pais_argentina", "Argentina" %><br>
-    <%= form.radio_button :pais, 'Uruguai' %>
-    <%= form.label "complemento_pais_uruguai", "Uruguai" %><br>
-  </div>
+  <% paises = { 'Brasil'    => 'Brasil'    ,
+                'Argentina' => 'Argentina' ,
+                'Uruguai'   => 'Uruguai'   ,
+                'Bolivia'   => 'Bolivia'   } %>
+
+  <%= button_select(:complemento, :pais, paises) %>
 
   <div class="field">
     <%= form.label :description %>
