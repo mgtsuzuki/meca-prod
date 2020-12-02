@@ -1,9 +1,11 @@
 version: '3'
 services:
   web:
-    image: mgtsuzuki/meca_web:prod
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
     ports:
-      - "80:3000"
+      - "3000:3000"
     env_file:
       - .env/production/database
       - .env/production/web
@@ -15,17 +17,10 @@ services:
       - .env/production/database
     volumes:
       - db_data:/var/lib/postgresql/data
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:                                             
-      - "8080:8080"                                    
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"     
-    deploy:                                            
-      placement:
-        constraints: [node.role == manager]            
   db-migrator:
-    image: mgtsuzuki/meca_web:prod
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
     command: ["./wait-for", "--timeout=300", "database:5432", "--",   
               "bin/rails", "db:migrate"]   
     env_file:
@@ -35,7 +30,9 @@ services:
       restart_policy:    
         condition: none
   db-seeder:
-    image: mgtsuzuki/meca_web:prod
+    build: 
+      context: .
+      dockerfile: Dockerfile.prod
     command: ["./wait-for", "--timeout=300", "database:5432", "--",   
               "bin/rails", "db:seed"]   
     env_file:
