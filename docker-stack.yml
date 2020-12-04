@@ -26,23 +26,10 @@ services:
         constraints: [node.role == manager]            
   db-migrator:
     image: mgtsuzuki/meca_web:prod
-    command: ["./wait-for", "--timeout=300", "database:5432", "--",   
-              "bin/rails", "db:migrate"]   
+    command: sh -c "/usr/src/app/wait-for --timeout=300 database:5432 -- bin/rails db:migrate && bin/rails db:seed"
     env_file:
       - .env/production/database
       - .env/production/web
-    deploy:
-      restart_policy:    
-        condition: none
-  db-seeder:
-    image: mgtsuzuki/meca_web:prod
-    command: ["./wait-for", "--timeout=300", "database:5432", "--",   
-              "bin/rails", "db:seed"]   
-    env_file:
-      - .env/production/database
-      - .env/production/web
-    depends_on:
-      - db-migrator
     deploy:
       restart_policy:    
         condition: none
